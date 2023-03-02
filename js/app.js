@@ -16,6 +16,7 @@ const showData = (tools, isClicked) =>{
         tools = tools.slice(0, 6);
     }
     const cardsContainer = document.getElementById('cards-container');
+    cardsContainer.innerHTML = '';
     tools.forEach(tool => {
         const div = document.createElement('div');
         div.classList.add('col');
@@ -40,7 +41,7 @@ const showData = (tools, isClicked) =>{
                     </div>
                     <!-- CARD FOOTER BUTTON -->
                     <div>
-                        <button class="btn btn-warning rounded-circle" onclick="showModal(${tool.id})" data-bs-toggle="modal" data-bs-target="#detailsModal">
+                        <button class="btn btn-warning rounded-circle" onclick="showModal('${tool.id}')" data-bs-toggle="modal" data-bs-target="#detailsModal">
                             <i class="fa-solid fa-arrow-right text-danger"></i>
                         </button>
                     </div>
