@@ -17,14 +17,29 @@ const showData = (tools) =>{
         div.classList.add('col');
         div.innerHTML = `
             <div class="card h-100">
-                <img src="" class="card-img-top" alt="...">
+                <img src="${tool.image}" class="card-img-top" alt="${tool.name} image">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                    additional content. This content is a little bit longer.</p>
+                    <h5 class="card-title">Features</h5>
+                    <ol class="list-unstyled">
+                        <li>1. ${tool.features[0]}</li>
+                        <li>2. ${tool.features[1]}</li>
+                        <li>3. ${tool.features[2]}</li>
+                    </ol>
                 </div>
-                <div class="card-footer bg-body">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                <div class="card-footer bg-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3>${tool.name}</h3>
+                        <p>
+                            <i class="fa-solid fa-calendar-days"></i>
+                            ${tool.published_in}
+                        </p>
+                    </div>
+                    <!-- CARD FOOTER BUTTON -->
+                    <div>
+                        <button class="btn btn-warning rounded-circle">
+                            <i class="fa-solid fa-arrow-right text-danger"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
