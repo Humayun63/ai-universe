@@ -12,6 +12,8 @@ const loadData = async(isClicked) =>{
 // FUNCTION FOR SHOW DATA IN DOM
 const showData = (tools, isClicked) =>{
     const seeMorebtn = document.getElementById('see-more-btn');
+    const sortByBtn = document.getElementById('sort-by-btn');
+    sortByBtn.classList.remove('d-none');
     if(!isClicked){
         tools = tools.slice(0, 6);
     }
