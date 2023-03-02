@@ -47,6 +47,7 @@ const showData = (tools, isClicked) =>{
                 </div>
             </div>
         `;
+        document.getElementById('spinner').classList.add('d-none');
         cardsContainer.appendChild(div);
         if(isClicked){
             seeMorebtn.classList.add('d-none');
@@ -54,7 +55,6 @@ const showData = (tools, isClicked) =>{
             seeMorebtn.classList.remove('d-none');
         }
     });
-    console.log(tools)
 }
 
 //CLICK HANDLER FOR SEE MORE BUTTON 
