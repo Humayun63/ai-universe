@@ -104,6 +104,8 @@ const dynamicModal = (data) =>{
         </div>
     `;
     modalCardContainer.appendChild(secondDiv);
+    
+    // ACCURACY TAG INSERTING!
     const secondDivHeader = document.getElementById('secondDivHeader');
     if(accuracy !== null){
         const span = document.createElement('span');
