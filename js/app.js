@@ -1,19 +1,24 @@
+// FOR SORT CARDS
+let isSorted = false;
 // FUNCTION FOR LOAD DATA WITH API
-const loadData = async(isClicked) =>{
+const loadData = async(isClicked, isSort) =>{
     try {
         const res = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
         const data = await res.json();
-        showData(data.data.tools, isClicked); 
+        showData(data.data.tools, isClicked, isSort); 
     } catch (error) {
         console.log(error);
     }
 };
 
 // FUNCTION FOR SHOW DATA IN DOM
-const showData = (tools, isClicked) =>{
+const showData = (tools, isClicked, isSort) =>{
     const seeMorebtn = document.getElementById('see-more-btn');
     const sortByBtn = document.getElementById('sort-by-btn');
     sortByBtn.classList.remove('d-none');
+    if(isSort){
+        tools = tools.sort((a,b) => new Date(a.published_in) - new Date(b.published_in));
+    }
     if(!isClicked){
         tools = tools.slice(0, 6);
     }
@@ -62,6 +67,16 @@ const showData = (tools, isClicked) =>{
 
 //CLICK HANDLER FOR SEE MORE BUTTON 
 document.getElementById('see-more-btn').addEventListener('click', function(){
-    loadData(true);
+    if(isSorted){
+        loadData(true, true);
+    }else{
+        loadData(true);
+    }
+})
+
+// CLICK HANDLER FOR SORT BUTTON
+document.getElementById('sort-by-btn').addEventListener('click', function(){
+    loadData(false, true);
+    isSorted = true;
 })
 loadData();
