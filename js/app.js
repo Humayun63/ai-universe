@@ -11,6 +11,7 @@ const loadData = async() =>{
 
 // FUNCTION FOR SHOW DATA IN DOM
 const showData = (tools) =>{
+    tools = tools.slice(0, 6);
     const cardsContainer = document.getElementById('cards-container');
     tools.forEach(tool => {
         const div = document.createElement('div');
