@@ -1,17 +1,20 @@
 // FUNCTION FOR LOAD DATA WITH API
-const loadData = async() =>{
+const loadData = async(isClicked) =>{
     try {
         const res = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
         const data = await res.json();
-        showData(data.data.tools); 
+        showData(data.data.tools, isClicked); 
     } catch (error) {
         console.log(error);
     }
 };
 
 // FUNCTION FOR SHOW DATA IN DOM
-const showData = (tools) =>{
-    tools = tools.slice(0, 6);
+const showData = (tools, isClicked) =>{
+    const seeMorebtn = document.getElementById('see-more-btn');
+    if(!isClicked){
+        tools = tools.slice(0, 6);
+    }
     const cardsContainer = document.getElementById('cards-container');
     tools.forEach(tool => {
         const div = document.createElement('div');
@@ -45,7 +48,17 @@ const showData = (tools) =>{
             </div>
         `;
         cardsContainer.appendChild(div);
+        if(isClicked){
+            seeMorebtn.classList.add('d-none');
+        }else{
+            seeMorebtn.classList.remove('d-none');
+        }
     });
     console.log(tools)
 }
+
+//CLICK HANDLER FOR SEE MORE BUTTON 
+document.getElementById('see-more-btn').addEventListener('click', function(){
+    loadData(true);
+})
 loadData();
