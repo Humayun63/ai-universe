@@ -40,7 +40,7 @@ const showData = (tools, isClicked) =>{
                     </div>
                     <!-- CARD FOOTER BUTTON -->
                     <div>
-                        <button class="btn btn-warning rounded-circle">
+                        <button class="btn btn-warning rounded-circle" onclick="showModal(${tool.id})" data-bs-toggle="modal" data-bs-target="#detailsModal">
                             <i class="fa-solid fa-arrow-right text-danger"></i>
                         </button>
                     </div>
