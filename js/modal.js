@@ -8,6 +8,7 @@ const showModal = (id) =>{
 
 // DYNAMIC MODAL CREATION
 const dynamicModal = (data) =>{
+    const accuracy = data.accuracy.score;
     const modalCardContainer = document.getElementById('modal-card-container');
     modalCardContainer.innerHTML = '';
     // CREATING MODAL FIRST DIV
@@ -44,13 +45,13 @@ const dynamicModal = (data) =>{
                     </div>
                 </div>
                 
-                <div class="d-flex justify-content-between mt-2">
-                    <div>
+                <div class="row row-cols-1 row-cols-md-2 g-3 mt-2">
+                    <div class="col">
                         <h6>Features</h6>
                         <ul id="features-list">
                         </ul>
                     </div>
-                    <div id="integration-container">
+                    <div id="integration-container" class="col">
                         <h6>Integrations</h6>
                     </div>
                 </div>
@@ -69,6 +70,7 @@ const dynamicModal = (data) =>{
         li.innerText = features[key].feature_name;
         featuresList.appendChild(li);
     }
+
     // INTEGRATION LIST CREATING
     const integrations = data.integrations;
     const integrationContainer = document.getElementById('integration-container');
@@ -84,11 +86,6 @@ const dynamicModal = (data) =>{
              li.innerText = item;
              ul.appendChild(li);
         }
-        // for(let i=0; i<integrations.length; i++){
-        //     const li = document.createElement('li');
-        //      li.innerText = integrations[i];
-        //      ul.appendChild(li);
-        // }
         integrationContainer.appendChild(ul);
     }
     
@@ -97,7 +94,7 @@ const dynamicModal = (data) =>{
     secondDiv.classList.add('col');
     secondDiv.innerHTML = `
         <div class="card h-100">
-            <div class="p-1">
+            <div class="p-1" id="secondDivHeader">
                 <img src="${data.image_link[0]}" class="card-img-top" alt="...">
             </div>
             <div class="card-body text-center">
@@ -107,4 +104,14 @@ const dynamicModal = (data) =>{
         </div>
     `;
     modalCardContainer.appendChild(secondDiv);
+    const secondDivHeader = document.getElementById('secondDivHeader');
+    if(accuracy !== null){
+        const span = document.createElement('span');
+        span.classList.add('bg-danger', 'py-2', 'px-3', 'text-white', 'rounded', 'position-absolute');
+        span.setAttribute('style', 'top:10px; right:10px');
+        span.innerHTML = `
+            ${accuracy * 100}% accuracy
+        `;
+        secondDivHeader.appendChild(span);
+    }
 }
