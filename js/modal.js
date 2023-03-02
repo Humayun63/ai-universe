@@ -23,7 +23,7 @@ const dynamicModal = (data) =>{
                         <div class="card h-100">
                             <div class="card-body text-success">
                                 <p>${data.pricing !== null ? data.pricing[0].price : 'Free of Cost'}
-                                ${data.pricing !== null ? data.pricing[0].plan : 'Basic'}</p>
+                                <br>${data.pricing !== null ? data.pricing[0].plan : 'Basic'}</p>
                             </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@ const dynamicModal = (data) =>{
                         <div class="card h-100">
                             <div class="card-body text-warning">
                                 <p>${data.pricing !== null ? data.pricing[1].price : 'Free of Cost'}
-                                ${data.pricing !== null ? data.pricing[1].plan : 'Pro'}</p>
+                                <br>${data.pricing !== null ? data.pricing[1].plan : 'Pro'}</p>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@ const dynamicModal = (data) =>{
                         <div class="card h-100">
                             <div class="card-body text-danger">
                                 <p>${data.pricing !== null ? data.pricing[2].price : 'Free of Cost'}
-                                ${data.pricing !== null ? data.pricing[2].plan : 'Enterprise'}</p>
+                                <br>${data.pricing !== null ? data.pricing[2].plan : 'Enterprise'}</p>
                             </div>
                         </div>
                     </div>
