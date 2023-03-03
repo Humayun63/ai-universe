@@ -1,25 +1,25 @@
 // FOR SORT CARDS
 let isSorted = false;
 // FUNCTION FOR LOAD DATA WITH API
-const loadData = async(isClicked, isSort) =>{
+const loadData = async (isClicked, isSort) => {
     try {
         const res = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
         const data = await res.json();
-        showData(data.data.tools, isClicked, isSort); 
+        showData(data.data.tools, isClicked, isSort);
     } catch (error) {
         console.log(error);
     }
 };
 
 // FUNCTION FOR SHOW DATA IN DOM
-const showData = (tools, isClicked, isSort) =>{
+const showData = (tools, isClicked, isSort) => {
     const seeMorebtn = document.getElementById('see-more-btn');
     const sortByBtn = document.getElementById('sort-by-btn');
     sortByBtn.classList.remove('d-none');
-    if(isSort){
-        tools = tools.sort((a,b) => new Date(a.published_in) - new Date(b.published_in));
+    if (isSort) {
+        tools = tools.sort((a, b) => new Date(a.published_in) - new Date(b.published_in));
     }
-    if(!isClicked){
+    if (!isClicked) {
         tools = tools.slice(0, 6);
     }
     const cardsContainer = document.getElementById('cards-container');
@@ -27,15 +27,13 @@ const showData = (tools, isClicked, isSort) =>{
     tools.forEach(tool => {
         const div = document.createElement('div');
         div.classList.add('col');
+        const featureId = `featureForId${tool.id}`;
         div.innerHTML = `
             <div class="card h-100">
                 <img src="${tool.image}" class="card-img-top" alt="${tool.name} image">
                 <div class="card-body">
                     <h5 class="card-title">Features</h5>
-                    <ol class="list-unstyled">
-                        <li>1. ${tool.features[0]}</li>
-                        <li>2. ${tool.features[1]}</li>
-                        <li>3. ${tool.features[2]}</li>
+                    <ol id="${featureId}">
                     </ol>
                 </div>
                 <div class="card-footer bg-body d-flex justify-content-between align-items-center">
@@ -57,25 +55,36 @@ const showData = (tools, isClicked, isSort) =>{
         `;
         document.getElementById('spinner').classList.add('d-none');
         cardsContainer.appendChild(div);
-        if(isClicked){
+
+        // // FEATURES INSERTING
+        const featuresArray = tool.features;
+          const featureListContainer = document.getElementById(featureId);
+          for (const item of featuresArray) {
+              const li = document.createElement('li');
+              li.innerText = item;
+              featureListContainer.appendChild(li);
+          }
+
+        if (isClicked) {
             seeMorebtn.classList.add('d-none');
-        }else{
+        } else {
             seeMorebtn.classList.remove('d-none');
         }
     });
+
 }
 
 //CLICK HANDLER FOR SEE MORE BUTTON 
-document.getElementById('see-more-btn').addEventListener('click', function(){
-    if(isSorted){
+document.getElementById('see-more-btn').addEventListener('click', function () {
+    if (isSorted) {
         loadData(true, true);
-    }else{
+    } else {
         loadData(true);
     }
 })
 
 // CLICK HANDLER FOR SORT BUTTON
-document.getElementById('sort-by-btn').addEventListener('click', function(){
+document.getElementById('sort-by-btn').addEventListener('click', function () {
     loadData(false, true);
     isSorted = true;
 })
